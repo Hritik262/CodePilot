@@ -2,17 +2,21 @@ import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../css/Navbar.css'
-function Logout({ onLogout, setIsLoggedIn }) {
+function Logout({ setIsLoggedIn }) {
     const navigate = useNavigate();
 
     const handleLogout = async () => {
         try {
-            await axios.post('/api/v1/users/logout', null, {
+            const response = await axios.post('/api/v1/users/logout', null, {
                 withCredentials: true, 
             });
-            onLogout(); 
-            setIsLoggedIn(false); 
-            navigate('/login'); 
+            if(response.status === 200) {
+                setIsLoggedIn(false); 
+                console.log(response)
+                alert('Logout successful!');
+                console.log('User Logged out')
+                navigate('/login'); 
+            }
         } catch (error) {
             console.error('Error during logout:', error);
         }
