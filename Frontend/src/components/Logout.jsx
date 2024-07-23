@@ -14,7 +14,9 @@ function Logout({ setIsLoggedIn }) {
                 setIsLoggedIn(false); 
                 console.log(response)
                 alert('Logout successful!');
-                console.log('User Logged out')
+                console.log('User Logged out');
+                localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('avatar');
                 navigate('/login'); 
             }
         } catch (error) {

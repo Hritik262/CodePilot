@@ -44,6 +44,8 @@ function Login({ setIsLoggedIn, setAvatar }) {
           alert('Login successful!');
           setIsLoggedIn(true);
           setAvatar(response.data.avatar);
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('avatar', response.data.avatar);
           navigate('/CodePilot');
         }
       } catch (error) {

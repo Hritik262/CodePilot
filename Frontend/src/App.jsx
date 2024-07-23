@@ -25,6 +25,14 @@ import './App.css';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [avatar, setAvatar] = useState('');
+
+  useEffect(() => {
+    const loggedIn = localStorage.getItem('isLoggedIn');
+    if (loggedIn === 'true') {
+      setIsLoggedIn(true);
+      setAvatar(localStorage.getItem('avatar') || '');
+    }
+  }, []);
   
 
   return (
