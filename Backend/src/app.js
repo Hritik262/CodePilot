@@ -12,8 +12,10 @@ app.use(express.json({
     limit: "16kb"
 }))
 app.use(express.urlencoded({extended: true, limit: "16kb"}))
-app.use(express.static("public"))
-app.use(cookieParser())
+app.use(express.static("public")) // to store images and favicon
+app.use(cookieParser()) // to perform CRUD operation on user browser from server
+
+// 
 
 // routes import
 import userRouter from './routes/user.routes.js'
