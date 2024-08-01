@@ -23,7 +23,10 @@ import questionRouter from './routes/question.routes.js';
 import testRouter from './routes/test.routes.js';
 // import testRouter from './routes/test.routes.js';
 
-
+app.get("/",(req,res) =>{
+    res.send("hello");
+    res.end();
+})
 
 //routes declaration
 app.use("/api/v1/users",userRouter)
