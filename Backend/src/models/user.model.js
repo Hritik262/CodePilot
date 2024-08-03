@@ -1,16 +1,17 @@
 import mongoose, {Schema} from "mongoose";
-import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken" //based on cryptography algorithm
+import bcrypt from "bcrypt" // password hashing
 
 const userSchema = new Schema(
     {
+        //id generate by mongoDb is bson not json
         username: {
             type: String,
             required: true,
             unique: true,
             lowercase: true,
             trim: true, 
-            index: true
+            index: true // to enable searching field on any field for optimzation only 
         },
         email: {
             type: String,
@@ -32,7 +33,7 @@ const userSchema = new Schema(
         coverImage: {
             type: String, // cloudinary url
         },
-        testHistory: [
+        testHistory: [ 
             {
                 type: Schema.Types.ObjectId,
                 ref: "AttemptedTest"
@@ -48,21 +49,21 @@ const userSchema = new Schema(
 
     },
     {
-        timestamps: true
+        timestamps: true // createdAt, updatedAt
     }
 )
 // before some to encrypt the password. pre just invokes before saving the data
 userSchema.pre("save", async function (next) {
     if(!this.isModified("password")) return next();
 
-    this.password = await bcrypt.hash(this.password, 10)
+    this.password = await bcrypt.hash(this.password, 10) // what to hash and how many rounds
     next()
 })
-
+// mongoose can create custom methods
 userSchema.methods.isPasswordCorrect = async function(password){
     return await bcrypt.compare(password, this.password)
 }
-
+// jwt is a bearer token
 userSchema.methods.generateAccessToken = function(){
     return jwt.sign(
         {
