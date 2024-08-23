@@ -7,7 +7,7 @@ function Logout({ setIsLoggedIn }) {
 
     const handleLogout = async () => {
         try {
-            const response = await axios.post('https://codepilot-9q4e.onrender.com/api/v1/users/logout', null, {
+            const response = await axios.post('/api/v1/users/logout', null, {
                 withCredentials: true,
             });
             if (response.status === 200) {

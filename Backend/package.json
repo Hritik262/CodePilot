@@ -1,7 +1,7 @@
 {
-  "name": "chai-backend",
+  "name": "codepilot-backend",
   "version": "1.0.0",
-  "description": "a backend at chai aur code",
+  "description": "a backend for codepilot",
   "type": "module",
   "main": "index.js",
   "scripts": {
